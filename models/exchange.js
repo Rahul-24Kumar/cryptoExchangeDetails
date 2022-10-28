@@ -5,7 +5,7 @@ let exchange = new mongoose.Schema({
     S_No: {
         type: Number,
     },
-    
+
     exchangeId: {
         type: Number,
     },
@@ -17,6 +17,18 @@ let exchange = new mongoose.Schema({
     NoOf_Coins: {
         type: Number,
     },
+
+    status: {
+        type: Boolean,
+    },
+
+    baseUrl: {
+        type: URL,
+    },
+    
+    NoOfApi: {
+        type: Number,
+    }
 
 
 })

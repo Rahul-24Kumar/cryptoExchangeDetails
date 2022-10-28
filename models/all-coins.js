@@ -14,6 +14,16 @@ let allCoins = new mongoose.Schema({
     symbol: {
         type: String,
     },
+    logo: {
+        type: String,
+    },
+    contractAddress: {
+        type: String,
+    },
+    Decimal: {
+        type: Number,
+    },
+
     protocol: {
         type: String,
     },
@@ -23,7 +33,7 @@ let allCoins = new mongoose.Schema({
     website: {
         type: String,
     },
-    explore_Link: {
+    exploreLink: {
         type: String,
     },
 
