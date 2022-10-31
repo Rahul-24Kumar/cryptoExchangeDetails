@@ -2,44 +2,67 @@ const mongoose = require("mongoose");
 
 let allCoins = new mongoose.Schema({
 
-    S_No: {
-        type: Number,
-    },
-    Id :{
-        type:String,
-        unique :true
-    },
-    coinId: {
-        type: Number,
-        unique:true,
-        default:null
-    },
-    coinName: {
-        type: String,
-        unique:true,
-        default:null
-    },
-    symbol: {
-        type: String,
-        unique:true,
-        default:null
-    },
-    protocol: {
-        type: String,
-    },
-    network: {
-        type: String,
+    coinId:{
+        type:Number,
         
     },
-    website: {
-        type: [String],
-    },
-    explore_Link: {
-        type: [String],
-    },
 
-    socialMedia: {
-        type: [String],
+    S_NO: {
+        type:Number,
+        
+    },
+    contract_Addrress:{
+        type:String,
+        
+        default:null
+    },
+    coin_Name:{
+        type:String,
+        
+        required:true
+    },
+    symbol:{
+        type:String,
+        
+        required:true
+    },
+    decimal:{
+        type:String,
+        default:null
+    },
+    logo:{
+        type:String,
+        
+        default:null
+    },
+    exchange_Name:{
+        type:String,
+        
+        default:null
+    },
+    exchange_Link:{
+        type:String,
+        default:null
+    },
+    network:{
+        type:String,
+        
+        default:null
+    },
+    protocol:{
+        type:String,
+        default:null
+    },
+    website:{
+        type:String
+    },
+    explorerlink:{
+        type:String,
+        defalt:null
+    },
+    social_Media:{
+        type:String,
+        default:null
     }
 });
 

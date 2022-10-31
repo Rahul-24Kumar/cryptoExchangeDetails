@@ -6,6 +6,14 @@ const binanceSchema = new mongoose.Schema({
         type: String,
     },
 
+    exchangeId:{
+        type:mongoose.Schema.Types.Number,
+        ref:"exchange"
+    },
+    coinId:{
+        type:mongoose.Schema.Types.Number,
+        ref:"coinInfo"
+    },
     priceChange: {
         type: String,
     },
