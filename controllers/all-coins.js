@@ -10,7 +10,9 @@ const createCoins = async function (req, res) {
     let S_NO;
 
     let {
-        contract_Address,
+      exchangeId,
+      coinId,
+     contract_Address,
       coin_Name,
       symbol,
       decimal,
@@ -49,8 +51,8 @@ const createCoins = async function (req, res) {
     //     .send({ msg: "contract address already exists in database" });
     // }
 
-    let coinId = Number(random(4, ["0", "9"]));
-    console.log(coinId)
+    
+    
 
     // allCoin.forEach((e) => {
     //   if (e.coinId == coinId) {

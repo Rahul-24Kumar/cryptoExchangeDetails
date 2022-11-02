@@ -55,7 +55,7 @@ const binanceSchema = new mongoose.Schema({
     },
 
     openPrice: {
-        type: String
+        type: Number,
     },
 
     highPrice: {

@@ -14,7 +14,7 @@ const createExchange = async (req, res) => {
 
      let S_No;
 
-     let { exchangeName, NoOf_Coins,status, baseUrl, NoOfApi }= body
+     let { exchangeName,exchangeId, NoOf_Coins,status, baseUrl, NoOfApi }= body
 
      if (! exchangeName) {
         return res.status(400).send({msg:"exchange name must required in this field"})
@@ -24,7 +24,7 @@ const createExchange = async (req, res) => {
 
      let allExchange = await exchangeModel.find()
     
-     let exchangeId = Number(random(4, ["0", "9"]));
+   //   let exchangeId = Number(random(4, ["0", "9"]));
 
      S_No = allExchange.length + 1;
 

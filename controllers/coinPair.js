@@ -1,54 +1,75 @@
-const coinpairModel = require("../models/coinpairModel")
-const exchangeModel = require("../models/exchange")
-const coinModel = require("../models/all-coins")
-const axios = require("axios")
-    const createCoinpairData = async (req, res)=>{
+const coinpairModel = require("../models/coinpairModel");
+const exchangeModel = require("../models/exchange");
+const coinModel = require("../models/all-coins");
+const axios = require("axios");
+const random = require("../utils/helper")
+const createCoinpairData = async (req, res) => {
+  try {
+    // insert data in db using axios
+    let option = {
+      method: "get",
+      url: "https://api.indoex.io/getMarketDetails/",
+    };
 
-       try {
+    let resp = await axios(option);  
+
+    let result = resp.data.marketdetails;
+    console.log(result);
+
+    // let isExchangeIdPresent = await exchangeModel.findOne({
+    //   exchangeId: req.query.exchangeId,
+    // });
+
+    //   console.log(isExchangeIdPresent.exchangeId)
+
+    // let iscoinIdPresent = await coinModel.findOne({ coinId: req.query.coinId });
+    //  console.log(iscoinIdPresent)
+       result.sort((a,b)=>{
+           Number(b['24hrhigh']) - Number(a['24hrhigh'])
+       })
+
+       console.log(result)
+
+    let targetObj = [];
+    result.forEach((element) => {
+      targetObj.push({
+        coinownId: element.cmcid,
+        coinName: element.name,
+        coin24hPrice: element["24hrhigh"],
+        coinSymbol: element.pair,
+        lowPrice: element.lowsale,
+        highPrice: element.highsale,
+        closePrice: element.last,
+        volume: element.baseVolume,
+        exchangeId: 1,
         
-       // insert data in db using axios
-       let option = {
-            method:"get",
-            url:"https://api.indoex.io/getMarketDetails/"
-       }
+      });
+    });
 
-       let resp = await axios(option)
-       
-         let result = resp.data;
-         // console.log(result)
+    // console.log(targetObj);
+    let saveData = await coinpairModel.insertMany(targetObj);
+    //  console.log(saveData)
+    return res.status(201).send({ msg: "data created", data: saveData });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
-         
-         
-         for (let i=0; i <result.marketdetails.length; i++){
-                console.log(result.marketdetails[i]["name"])
-               
-         }
-      //  let isExchangeIdPresent = await exchangeModel.findOne({exchangeId:req.query.exchangeId})
+const getCoinByExIdAndCoinId = async (req, res) => {
+  try {
+    let { coinName, exchangeId } = req.body;
 
-         //   console.log(isExchangeIdPresent.exchangeId)        
-    //    console.log(isExchangeIdPresent)
-         //  let iscoinIdPresent = await coinModel.findOne({coinId:req.query.coinId})
-         //  console.log(iscoinIdPresent)
-
-         let newData = {
-            exhangeId:isExchangeIdPresent.exchangeId,
-            coinId:iscoinIdPresent.coinId,
-            coinownId :result.marketdetails[0]["cmcid"],
-            coinName : result.marketdetails[0]["name"],
-            coin24hPrice : result.marketdetails[0]["24hrhigh"]
-         }
-         
-         // let spreadData = {...newData}
-         // console.log(spreadData)
-             let saveData = await coinpairModel.create(newData)
-            //  console.log(saveData)
-              res.status(201).send({msg:"data created" , data:saveData})
-
-             
-      
-       } catch (error) {
-        console.log(error.message)
-       }
-
-    }
-module.exports = {createCoinpairData}
+    let fetchedData = await coinpairModel.find({
+      coinName:coinName,
+      exchangeId: exchangeId,
+    });
+    res.status(200).json({
+      message: `success`,
+      error: null,
+      data: fetchedData,
+    });
+  } catch (error) {
+    // console.log(error);
+  }
+};
+module.exports = { createCoinpairData, getCoinByExIdAndCoinId };

@@ -15,16 +15,19 @@ const binanceApi = async function (req, res) {
 
         // console.log(result);
         let data = result.data;
+        // data.sort((a,b)=>{
+        //   return Number(a.openPrice) -Number(b.openPrice)
+        // })
         //  console.log(data)
-
-         let exchangeId = req.params;
-         let coinId = req.params;
+              console.log(data)
+        //  let exchangeId = req.params;
+        //  let coinId = req.params;
          
 
-         let isPresentexchangeId = await exchangeModel.findOne({exchangeId:req.params.exchangeId})
-         console.log(isPresentexchangeId) 
-         let isPresentcoinId = await coinModel.findOne({coinId:req.params.coinId})
-         console.log(isPresentcoinId)
+        //  let isPresentexchangeId = await exchangeModel.findOne({exchangeId:req.params.exchangeId})
+        //  console.log(isPresentexchangeId) 
+        //  let isPresentcoinId = await coinModel.findOne({coinId:req.params.coinId})
+        //  console.log(isPresentcoinId)
 
 
                   

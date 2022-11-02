@@ -6,6 +6,9 @@ let allCoins = new mongoose.Schema({
         type:Number,
         
     },
+    exchangeId:{
+        type:Number,
+    },
 
     S_NO: {
         type:Number,

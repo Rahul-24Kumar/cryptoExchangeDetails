@@ -29,25 +29,31 @@ const pairSchema = new mongoose.Schema({
         type:Number
     },
     lowPrice:{
-        type:Number
+        type:Number,
+        default:null
     },
     highPrice:{
-        type:Number
+        type:Number,
+        default:null
     },
     openPrice:{
-        type:Number
+        type:Number,
+        default:null
     },
     closePrice:{
-        type:Number
+        type:Number,
+        default:null
     },
     volume:{
         type:Number
     },
     marketCap:{
-        type:String
+        type:String,
+        default:null
     },
     circulatingSUpply:{
-        type:String
+        type:String,
+        default:null
     },
     timeStamp:{
         type:Number
