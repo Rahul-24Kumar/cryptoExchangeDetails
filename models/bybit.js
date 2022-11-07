@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const binanceSchema = new mongoose.Schema({
+const bybitSchema = new mongoose.Schema({
+
 
     symbol: {
         type: String,
@@ -72,12 +73,11 @@ const binanceSchema = new mongoose.Schema({
         type: String,
         default: null
     },
-    
+
     quoteVolume: {
         type: String,
         default: null
     }
-
 });
 
-module.exports = mongoose.model("binance", binanceSchema);
+module.exports = mongoose.model("bybit", bybitSchema);

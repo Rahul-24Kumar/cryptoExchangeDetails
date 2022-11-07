@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const binanceSchema = new mongoose.Schema({
+const bitgetSchema = new mongoose.Schema({
+
 
     symbol: {
         type: String,
@@ -67,12 +68,11 @@ const binanceSchema = new mongoose.Schema({
         type: String,
         default: null
     },
-
     baseVolume: {
         type: String,
         default: null
     },
-    
+
     quoteVolume: {
         type: String,
         default: null
@@ -80,4 +80,4 @@ const binanceSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model("binance", binanceSchema);
+module.exports = mongoose.model("bitget", bitgetSchema);

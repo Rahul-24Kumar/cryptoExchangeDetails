@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
-const binanceSchema = new mongoose.Schema({
+const indeoxSchema = new mongoose.Schema({
 
     symbol: {
         type: String,
@@ -67,17 +67,15 @@ const binanceSchema = new mongoose.Schema({
         type: String,
         default: null
     },
-
     baseVolume: {
         type: String,
         default: null
     },
-    
+
     quoteVolume: {
         type: String,
         default: null
     }
+})
 
-});
-
-module.exports = mongoose.model("binance", binanceSchema);
+module.exports = mongoose.model("indeox", indeoxSchema)
