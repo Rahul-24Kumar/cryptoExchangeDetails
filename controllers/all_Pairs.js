@@ -1,10 +1,14 @@
-const coinpairModel = require("../models/all_Pairs");
-const exchangeModel = require("../models/all_Exchanges");
-const binance = require('../models/binance');
 const ftx = require('../models/ftx');
 const indoex = require('../models/indoex');
+const binance = require('../models/binance');
 const coinModel = require("../models/all_Coins");
-const axios = require("axios");
+const coinpairModel = require("../models/all_Pairs");
+const exchangeModel = require("../models/all_Exchanges");
+
+
+
+
+
 
 
 
@@ -52,4 +56,6 @@ const getCoinByExIdAndCoinId = async (req, res) => {
    
   }
 };
+
+
 module.exports = { coinPair, getCoinByExIdAndCoinId };

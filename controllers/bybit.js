@@ -1,7 +1,7 @@
 const bybit = require('../models/bybit');
 const axios = require('axios');
 
-const bybitExchange =  async (req, res) => {
+const bybitExchange =  async () => {
     try {
         let options = {
             method: 'get',
@@ -18,12 +18,18 @@ const bybitExchange =  async (req, res) => {
 
         result.forEach(element => {
             bybitApiData.push({
+
                 pairName: element.symbol,
                 lastPrice: element.last_price,
                 bidPrice: element.bid_price,
                 highPrice: element.high_price_24h,
                 lowPrice: element.low_price_24h,
                 volume: element.volume_24h,
+                askPrice: element.ask_price,
+                openPrice: element.open,
+                priceChangePercent: element.price_24h_pcnt,
+                lastPrice1h: element.prev_price_1h
+
                
             });
         });
@@ -31,14 +37,20 @@ const bybitExchange =  async (req, res) => {
 
 
         let bybitInDb = await bybit.insertMany(bybitApiData);
-
+        console.log(bybitInDb);
    
-        return res.status(200).send({ msg: "successful", bybitAllData: bybitInDb });
+      //  return res.status(200).send({ msg: "successful", bybitAllData: bybitInDb });
 
     } catch (error) {
-        return res.status(500).send({ msg: "There is some technical error!", error });
+       // return res.status(500).send({ msg: "There is some technical error!", error });
     }
 }
+
+
+
+  //  setInterval(bybitExchange, 1500);
+
+
 
 let getBybitAllPair = async (req, res) => {
     try {

@@ -1,7 +1,7 @@
 const okx = require("../models/okx")
 const axios = require("axios")
 
-const okxExchange = async (req, res) => {
+const okxExchange = async () => {
 
     try {
 
@@ -20,25 +20,36 @@ const okxExchange = async (req, res) => {
 
         result.forEach(element => {
             okxApiData.push({
+
                 pairName: element.instId,
                 lastPrice: element.last,
                 highPrice: element.high24h,
                 lowPrice: element.low24h,
                 volume: element.vol24h,
+                askPrice: element.askPx,
+                bidPrice: element.bidPx,
+                openPrice: element.open24h
+
             });
         });
 
 
 
         let okxInDb = await okx.insertMany(okxApiData);
+        console.log(okxInDb);
 
 
-        return res.status(200).send({ msg: "successful", okxAllData: okxInDb });
+        //   return res.status(200).send({ msg: "successful", okxAllData: okxInDb });
 
     } catch (error) {
-        return res.status(500).send({ msg: "There is some technical error!", error });
+        //  return res.status(500).send({ msg: "There is some technical error!", error });
     }
 }
+
+
+  // setInterval(okxExchange, 1500);
+
+
 
 let getOkxAllPair = async (req, res) => {
     try {

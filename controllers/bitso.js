@@ -1,7 +1,7 @@
 const bitso = require("../models/bitso")
 const axios = require("axios")
 
-const bitsoExchange = async (req, res) => {
+const bitsoExchange = async () => {
 
     try {
 
@@ -20,24 +20,31 @@ const bitsoExchange = async (req, res) => {
 
         result.forEach(element => {
             bitsoApiData.push({
+
                 pairName: element.book,
                 lastPrice: element.last,
                 highPrice: element.high,
                 lowPrice: element.low,
-                volume: element.volume
+                volume: element.volume,
+                bidPrice: element.bid,
+                askPrice: element.ask,
+                timeStamp: element.created_at
             });
         });
 
 
         let bitsoInDb = await bitso.insertMany(bitsoApiData);
+        console.log(bitsoInDb);
 
 
-        return res.status(200).send({ msg: "successful", bitsoAllData: bitsoInDb });
+        //  return res.status(200).send({ msg: "successful", bitsoAllData: bitsoInDb });
 
     } catch (error) {
-        return res.status(500).send({ msg: "There is some technical error!", error });
+        //  return res.status(500).send({ msg: "There is some technical error!", error });
     }
 }
+
+//setInterval(bitsoExchange, 1500);
 
 let getBitsoAllPair = async (req, res) => {
     try {

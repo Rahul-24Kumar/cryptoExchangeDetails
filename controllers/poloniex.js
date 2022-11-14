@@ -1,7 +1,7 @@
 const poloniex = require("../models/poloniex")
 const axios = require("axios")
 
-const poloniexExchange = async (req, res) => {
+const poloniexExchange = async () => {
 
     try {
 
@@ -20,27 +20,44 @@ const poloniexExchange = async (req, res) => {
 
         result.forEach(element => {
             poloniexApiData.push({
+
                 coinName: element.displayName,
                 pairName: element.symbol,
                 lastPrice: element.close,
                 highPrice: element.high,
                 lowPrice: element.low,
                 baseVolume: element.baseVolume,
-                quoteVolume: element.quoteVolume
+                quoteVolume: element.quoteVolume,
+                amount: element.amount,
+                openTime: element.startTime,
+                closeTime: element.closeTime,
+                openPrice: element.open,
+                tradeCount: element.tradeCount,
+                qty: element.quantity
+
             });
         });
 
 
 
         let poloniexInDb = await poloniex.insertMany(poloniexApiData);
+        console.log(poloniexInDb);
 
 
-        return res.status(200).send({ msg: "successful", poloniexAllData: poloniexInDb });
+
+        //   return res.status(200).send({ msg: "successful", poloniexAllData: poloniexInDb });
 
     } catch (error) {
-        return res.status(500).send({ msg: "There is some technical error!", error });
+        //  return res.status(500).send({ msg: "There is some technical error!", error });
     }
 }
+
+
+ // setInterval(poloniexExchange, 1500);
+
+
+
+
 
 let getPoloniexAllPair = async (req, res) => {
     try {

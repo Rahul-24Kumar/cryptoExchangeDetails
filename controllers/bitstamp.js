@@ -2,7 +2,7 @@ let axios = require('axios');
 let bitstampModel = require('../models/bitstamp');
 
 
-const bitstampFunction = async function (req, res) {
+const bitstampFunction = async function () {
     try {
         let options = {
             method: 'get',
@@ -24,27 +24,34 @@ const bitstampFunction = async function (req, res) {
                 bidPrice: element.bid,
                 highPrice: element.high,
                 lowPrice: element.low,
-                volume: element.volume
+                volume: element.volume,
+                askPrice: element.bestAsk,
+                openPrice: element.open,
+                priceChangePercent: element.percent_change_24,
+                timeStamp: element.timestamp,
 
             })
         });
 
 
         let bitstampApiInDb = await bitstampModel.insertMany(bitstampApiData);
+        console.log(bitstampApiInDb);
 
-        return res.status(200).send({ msg: "successful", bitstampData: bitstampApiInDb });
+        // return res.status(200).send({ msg: "successful", bitstampData: bitstampApiInDb });
 
     } catch (error) {
-        return res.status(500).send({ msg: "There is some technical error!", error });
+        // return res.status(500).send({ msg: "There is some technical error!", error });
     }
 }
 
+//setInterval(bitstampFunction, 1500);
+
 let getBitstampAllPair = async (req, res) => {
     try {
-       
-        let bitstampApi = await bitstampModel.find().select({pairName: 1});
 
-       
+        let bitstampApi = await bitstampModel.find().sort({volume: -1});
+
+
         return res.status(200).send({ msg: "successfull", bitstampApiData: bitstampApi })
 
     } catch (error) {

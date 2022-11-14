@@ -35,7 +35,7 @@ const createExchange = async (req, res) => {
          exchangeId,
          exchangeName,
          totalCoins
-       }
+      }
 
       let resp = await exchangeModel.create(newExchange)
 

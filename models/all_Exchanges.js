@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-
 let exchange = new mongoose.Schema({
 
   S_No: {
@@ -15,11 +14,31 @@ let exchange = new mongoose.Schema({
     type: String,
   },
 
-  coinId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'coinsDetails',
-  }
-});
+  markets: {
+    type: String,
+    default: null
+  },
 
+  volume: {
+    type: String,
+    default: null
+  },
+
+  coins: {
+    type: Number,
+    default: 0
+  },
+
+  avgLiquidity: {
+    type: String,
+    default: null
+  },
+  
+  time: {
+    type: Date,
+    default: Date.now
+}
+
+});
 
 module.exports = mongoose.model("allExchanges", exchange);
